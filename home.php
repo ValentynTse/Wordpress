@@ -82,7 +82,8 @@ Template Name: home
 <section class="benefits">
    <div class="container">
       <div class="benefits__inner">
-         <img data-wow-delay="2s" class="benefits__images wow animate__fadeInUp" src="<?php bloginfo("template_url");?>/assets/images/car.png" alt="car">
+         <img data-wow-delay="2s" class="benefits__images wow animate__fadeInUp"
+            src="<?php bloginfo("template_url"); ?>/assets/images/car.png" alt="car">
          <div class="benefits__content">
             <h2 class="title benefits__title">ЧОМУ МИ?</h2>
             <ul class="benefits__list">
@@ -119,48 +120,41 @@ Template Name: home
          ПРИГНАНІ НАМИ АВТО
       </h2>
       <div class="carousel__inner">
-         <div class="carousel__item">
-            <div class="carousel__item-box">
-               <img class="carousel__item-img" src="<?php bloginfo("template_url");?>/assets/images/carousel/1.jpg" alt="">
-               <h4 class="carousel__item-title">INFINITI QX50 2016 р.</h4>
-               <p class="carousel__item-text">Економія 4500 $</p>
-            </div>
-         </div>
-         <div class="carousel__item">
-            <div class="carousel__item-box">
-               <img class="carousel__item-img" src="<?php bloginfo("template_url");?>/assets/images/carousel/2.jpg" alt="">
-               <h4 class="carousel__item-title">TESLA MODEL 3 2018 р.</h4>
-               <p class="carousel__item-text">Економія 5500 $</p>
-            </div>
-         </div>
-         <div class="carousel__item">
-            <div class="carousel__item-box">
-               <img class="carousel__item-img" src="<?php bloginfo("template_url");?>/assets/images/carousel/3.jpg" alt="">
-               <h4 class="carousel__item-title">TESLA MODEL 3 2018 р.</h4>
-               <p class="carousel__item-text">Економія 5500 $</p>
-            </div>
-         </div>
-         <div class="carousel__item">
-            <div class="carousel__item-box">
-               <img class="carousel__item-img" src="<?php bloginfo("template_url");?>/assets/images/carousel/1.jpg" alt="">
-               <h4 class="carousel__item-title">INFINITI QX50 2016 р.</h4>
-               <p class="carousel__item-text">Економія 4500 $</p>
-            </div>
-         </div>
-         <div class="carousel__item">
-            <div class="carousel__item-box">
-               <img class="carousel__item-img" src="<?php bloginfo("template_url");?>/assets/images/carousel/2.jpg" alt="">
-               <h4 class="carousel__item-title">TESLA MODEL 3 2018 р.</h4>
-               <p class="carousel__item-text">Економія 5500 $</p>
-            </div>
-         </div>
-         <div class="carousel__item">
-            <div class="carousel__item-box">
-               <img class="carousel__item-img" src="<?php bloginfo("template_url");?>/assets/images/carousel/3.jpg" alt="">
-               <h4 class="carousel__item-title">TESLA MODEL 3 2018 р.</h4>
-               <p class="carousel__item-text">Економія 5500 $</p>
-            </div>
-         </div>
+
+         <?php
+         global $post;
+
+         $myposts = get_posts([
+            'numberposts' => -1,
+            // 'offset'      => 1,
+            // 'category'    => 1
+         ]);
+
+         if ($myposts) {
+            foreach ($myposts as $post) {
+               setup_postdata($post);
+               ?>
+               <div class="carousel__item">
+                  <div class="carousel__item-box">
+                     <?php the_post_thumbnail(
+                        array(380, 250),
+                        array(
+                           'class' => 'carousel__item-img'
+                        )
+                     ) ?>
+                     <h4 class="carousel__item-title">
+                        <?php the_title() ?>
+                     </h4>
+                     <p class="carousel__item-text">
+                        <?php the_content() ?>
+                     </p>
+                  </div>
+               </div>
+            <?php }
+         }
+         wp_reset_postdata(); ?>
+
+
       </div>
    </div>
 </section>
@@ -197,9 +191,10 @@ Template Name: home
          </div>
          <form class="contacts__form">
             <h2 class="title contacts__title">Залишити заявку</h2>
-            <input class="contacts__input" type="text" placeholder="Як вас звати?">
+            <? echo do_shortcode('[contact-form-7 id="4691ed9" title="Контактна форма"]')?>
+            <!-- <input class="contacts__input" type="text" placeholder="Як вас звати?">
             <input class="contacts__input" type="tel" placeholder="Ваш номер телефону">
-            <button class="contacts__btn button" type="submit">Відправити заявку</button>
+            <button class="contacts__btn button" type="submit">Відправити заявку</button> -->
          </form>
       </div>
    </div>

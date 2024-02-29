@@ -10,13 +10,14 @@
 </head>
 
 <body>
-   
+
    <header class="header">
       <div class="container">
          <div class="header__top">
-            <a class="logo" href="#">
+            <?php the_custom_logo()?>
+            <!-- <a class="logo" href="#">
                <img class="logo__img" src="<?php bloginfo("template_url");?>/assets/images/logo.svg" alt="logo">
-            </a>
+            </a> -->
             <a class="phone" href="tel:+380505556677">+38 (050) 555 66 77</a>
          </div>
          <div class="header__content">
